@@ -214,7 +214,7 @@ function pre_install(){
 
 # Download strongswan
 function download_files(){
-    strongswan_version='strongswan-5.5.1'
+    strongswan_version='strongswan-5.6.3'
     strongswan_file="$strongswan_version.tar.gz"
     if [ -f $strongswan_file ];then
         echo -e "$strongswan_file [$(__green "found")]"
@@ -345,7 +345,6 @@ function configure_ipsec(){
  cat > /usr/local/etc/ipsec.conf<<-EOF
 config setup
     uniqueids=never 
-
 conn iOS_cert
     keyexchange=ikev1
     fragmentation=yes
@@ -359,7 +358,6 @@ conn iOS_cert
     rightsourceip=10.31.2.0/24
     rightcert=client.cert.pem
     auto=add
-
 conn android_xauth_psk
     keyexchange=ikev1
     left=%defaultroute
@@ -370,7 +368,6 @@ conn android_xauth_psk
     rightauth2=xauth
     rightsourceip=10.31.2.0/24
     auto=add
-
 conn networkmanager-strongswan
     keyexchange=ikev2
     left=%defaultroute
@@ -382,7 +379,6 @@ conn networkmanager-strongswan
     rightsourceip=10.31.2.0/24
     rightcert=client.cert.pem
     auto=add
-
 conn ios_ikev2
     keyexchange=ikev2
     ike=aes256-sha256-modp2048,3des-sha1-modp2048,aes256-sha1-modp2048!
@@ -401,7 +397,6 @@ conn ios_ikev2
     dpdaction=clear
     fragmentation=yes
     auto=add
-
 conn windows7
     keyexchange=ikev2
     ike=aes256-sha1-modp1024!
@@ -416,7 +411,6 @@ conn windows7
     rightsendcert=never
     eap_identity=%any
     auto=add
-
 EOF
 }
 
